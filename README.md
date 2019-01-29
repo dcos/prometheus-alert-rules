@@ -7,6 +7,10 @@ This repository is the home of the official DC/OS Prometheus alert rules.
 Please read the documentation on Prometheus [alerting rules][1] carefully, then
 open a pull request with your changes.
 
+Each DC/OS component or framework should have a single rule file which contains
+all its alert rules. They will be passed to Prometheus via the `rule_files` 
+configuration parameter.
+
 ## Severity Levels
 
 Alerts may be configured at two severity levels, warning and critical.
