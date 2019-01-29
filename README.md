@@ -1,6 +1,6 @@
 # DC/OS Prometheus Alert Rules
 
-This repository is the home of the official DC/OS Prometheus alert rules.
+This repository is the home of the official DC/OS Prometheus alert rules. They are automatically included in releases of the DC/OS Monitoring framework. 
 
 ## Contributing
 
@@ -13,13 +13,13 @@ configuration parameter.
 
 ## Severity Levels
 
-Alerts may be configured at two severity levels, warning and critical.
+Alerts should be configured at two severity levels, warning and critical:
 
-Warnings should be used for alerts which will be read by a human, but are not
-necessarily urgent. They would, for example, trigger an email alert. 
+- **Warning** should be used for alerts which will be read by a human, but do not
+require immediate action. They would, for example, trigger an email notification. 
 
-Critical should be used for alerts which will immediately interrupt a human.
-They would, for example, trigger a pager. 
+- **Critical** should be used for alerts which will immediately interrupt a human.
+They would, for example, trigger a pager notification. 
 
 ## Related Projects
 
