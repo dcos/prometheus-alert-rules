@@ -1,0 +1,11 @@
+groups:
+- name: Telegraf 
+  rules:
+  - alert: HighErrorRate
+    expr: job:internal_agent_gather_errors:mean5m > 10
+    for: 10m
+    labels:
+      severity: critical
+    annotations:
+      summary: Telegraf is failing to gather metrics
+
