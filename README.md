@@ -1,6 +1,6 @@
 # DC/OS Prometheus Alert Rules
 
-This repository is the home of the official DC/OS Prometheus, a sub-component of the DC/OS Monitoring package, alert rules.
+This repository is the home of the official DC/OS Prometheus alert rules. They are automatically included in releases of the DC/OS Monitoring framework. 
 
 ## Contributing
 
