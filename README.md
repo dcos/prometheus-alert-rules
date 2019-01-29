@@ -16,10 +16,10 @@ configuration parameter.
 Alerts should be configured at two severity levels, warning and critical:
 
 - **Warning** should be used for alerts which will be read by a human, but are not
-necessarily urgent. They would, for example, trigger an email alert. 
+requiring immediate action. They would, for example, trigger an email notification. 
 
 - **Critical** should be used for alerts which will immediately interrupt a human.
-They would, for example, trigger a pager. 
+They would, for example, trigger a pager notification. 
 
 ## Related Projects
 
