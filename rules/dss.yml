@@ -1,0 +1,19 @@
+groups:
+- name: DSS
+  rules:
+  - alert: Failover
+    # If the uptime of the service is less than 300 s it likely failed over.
+    expr: dss_sched_uptime < 300
+    labels:
+      severity: warning
+    annotations:
+      summary: DC/OS storage service failed over
+  - alert: Disconnected
+    # The default heartbeat interval in Mesos is 1/(15 s) = 0.067/s.
+    expr: rate(dss_sched_events_heartbeat_process_count[5m]) < 0.05
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: DC/OS storage service has problem connecting to master
+
