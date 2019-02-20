@@ -6,6 +6,7 @@ groups:
     expr: dss_sched_uptime < 300
     labels:
       severity: warning
+      component: dcos-storage
     annotations:
       summary: DC/OS storage service failed over
   - alert: Disconnected
@@ -14,6 +15,7 @@ groups:
     for: 5m
     labels:
       severity: critical
+      component: dcos-storage
     annotations:
       summary: DC/OS storage service has problem connecting to master
 
