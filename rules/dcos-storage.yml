@@ -18,4 +18,27 @@ groups:
       service: dcos-storage
     annotations:
       summary: DC/OS storage service has problem connecting to master
-
+  - alert: "Volume provider RECOVERY"
+    expr: count(dss_obj_providers_recovery) > 0
+    for: 1m
+    labels:
+      severity: warning
+      service: dcos-storage
+    annotations:
+      summary: DC/OS storage service has at least one recovering volume provider
+  - alert: "Volume RECOVERY"
+    expr: count(dss_obj_volumes_recovery) > 0
+    for: 1m
+    labels:
+      severity: warning
+      service: dcos-storage
+    annotations:
+      summary: DC/OS storage service has at least one recovering volume
+  - alert: "Device RECOVERY"
+    expr: count(dss_obj_devices_recovery) > 0
+    for: 1m
+    labels:
+      severity: warning
+      service: dcos-storage
+    annotations:
+      summary: DC/OS storage service has at least one recovering volume
