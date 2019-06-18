@@ -38,4 +38,28 @@ groups:
       severity: warning
       service: dcos-storage
     annotations:
-      summary: DC/OS storage service has at least one recovering volume
+      summary: DC/OS storage service has at least one recovering device
+  - alert: "Volume provider MISSING"
+    expr: count(dss_obj_providers_missing) > 0
+    for: 5m
+    labels:
+      severity: warning
+      service: dcos-storage
+    annotations:
+      summary: DC/OS storage service has at least one missing volume provider
+  - alert: "Volume MISSING"
+    expr: count(dss_obj_volumes_missing) > 0
+    for: 5m
+    labels:
+      severity: warning
+      service: dcos-storage
+    annotations:
+      summary: DC/OS storage service has at least one missing volume
+  - alert: "Device MISSING"
+    expr: count(dss_obj_devices_missing) > 0
+    for: 5m
+    labels:
+      severity: warning
+      service: dcos-storage
+    annotations:
+      summary: DC/OS storage service has at least one missing device
