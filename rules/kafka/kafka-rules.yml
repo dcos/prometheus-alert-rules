@@ -35,7 +35,7 @@ groups:
       labels:
         severity: critical
       annotations:
-        summary: 'Kafka {{ $lables.service_name }}: {{ $value }} unclean leader elections'
+        summary: 'Kafka {{ $labels.service_name }}: {{ $value }} unclean leader elections'
         description: '{{ $value }} unclean partition leader elections in the cluster reported in the last 1 minute interval. When unclean leader election is held among out-of-sync replicas, there is a possibility of data loss if any messages were not synced prior to the loss of the former leader. So if the number of unclean elections is greater than 0, investigate broker logs to determine why leaders were re-elected, and look for WARN or ERROR messages. Consider setting the broker configuration parameter unclean.leader.election.enable to false so that a replica outside of the set of in-sync replicas is never elected leader.'
 
     - alert: ISR_Expand_Rate
@@ -44,7 +44,7 @@ groups:
       labels:
         severity: warning
       annotations:
-        summary: 'Kafka {{ $lables.service_name }}: {{ $value }} ISR Expansion Rate'
+        summary: 'Kafka {{ $labels.service_name }}: {{ $value }} ISR Expansion Rate'
         description: 'If a broker goes down, ISR for some of the partitions shrink. When that broker is up again, ISRs are expanded once the replicas are fully caught up. Other than that, the expected value for ISR expansion rate is 0. If ISR is expanding and shrinking frequently, adjust Allowed replica lag.'
 
     - alert: ISR_Shrink_Rate
@@ -53,7 +53,7 @@ groups:
       labels:
         severity: warning
       annotations:
-        summary: 'Kafka {{ $lables.service_name }}: {{ $value }} ISR Shrink Rate'
+        summary: 'Kafka {{ $labels.service_name }}: {{ $value }} ISR Shrink Rate'
         description: 'If a broker goes down, ISR for some of the partitions shrink. When that broker is up again, ISRs are expanded once the replicas are fully caught up. Other than that, the expected value for ISR shrink rate is 0. If ISR is expanding and shrinking frequently, adjust Allowed replica lag.'
 
     - alert: Broker_Count
@@ -62,7 +62,7 @@ groups:
       labels:
         severity: critical
       annotations:
-        summary: 'Kafka {{ $lables.service_name }}: No Brokers online!'
+        summary: 'Kafka {{ $labels.service_name }}: No Brokers online!'
         description: 'Broker count is 0'
 
     - alert: Network_Processor_Idle_Percent
@@ -71,7 +71,7 @@ groups:
       labels:
         severity: critical
       annotations:
-        summary: 'Kafka {{ $lables.service_name }}: Network Processor Idle Percent is {{ $value }}!'
+        summary: 'Kafka {{ $labels.service_name }}: Network Processor Idle Percent is {{ $value }}!'
         description: 'The average fraction of time the network processors are idle. A lower value {{ $value }} indicates that the network workload of the broker is very high.'
 
     - alert: Request_Handler_Idle_Percent
@@ -80,7 +80,7 @@ groups:
       labels:
         severity: critical
       annotations:
-        summary: 'Kafka {{ $lables.service_name }}: Request Handler Idle Percent is {{ $value }}!'
+        summary: 'Kafka {{ $labels.service_name }}: Request Handler Idle Percent is {{ $value }}!'
         description: 'The average fraction of time the request handler threads (IO) are idle. A lower value {{ $value }} indicates that the workload of a broker is very high.'
 
     - alert: Replica_Fetcher_Manager_Max_Lag
@@ -89,7 +89,7 @@ groups:
       labels:
         severity: critical
       annotations:
-        summary: 'Kafka {{ $lables.service_name }}: Replica Fetcher Manager Max Lag is {{ $value }}!'
+        summary: 'Kafka {{ $labels.service_name }}: Replica Fetcher Manager Max Lag is {{ $value }}!'
         description: 'The maximum lag between the time that messages are received by the leader replica and by the follower replicas.'
 
     - alert: Topic_Count
@@ -98,7 +98,7 @@ groups:
       labels:
         severity: warning
       annotations:
-        summary: 'Kafka {{ $lables.service_name }}: 1000 topics reached'
+        summary: 'Kafka {{ $labels.service_name }}: 1000 topics reached'
         description: 'The number of active topics in the cluster has reached 1000.'
     
     - alert: Request_Queue_Time_Max
@@ -116,7 +116,7 @@ groups:
       labels:
         severity: warning
       annotations:
-        summary: 'Kafka {{ $lables.service_name }}: {{ $value }}ms response queue time'
+        summary: 'Kafka {{ $labels.service_name }}: {{ $value }}ms response queue time'
         description: 'Max response queue time exceeded 100ms for a request. It is the length of time, in milliseconds, that the request waits in the response queue.'
 
     - alert: Zookeeper_Sync_Connect
@@ -125,5 +125,5 @@ groups:
       labels:
         severity: warning
       annotations:
-        summary: 'Kafka {{ $lables.service_name }}: Zookeeper Sync Disconected'
+        summary: 'Kafka {{ $labels.service_name }}: Zookeeper Sync Disconected'
         description: 'Zookeeper Sync Disconected'
