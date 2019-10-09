@@ -1,0 +1,121 @@
+groups:
+  - name: elasticsearch
+    rules:
+      - alert: Elastic_UP
+        expr: elasticsearch_up{job="elasticsearch"} != 1
+        for: 2m
+        labels:
+          severity: alert
+          value: '{{$value}}'
+        annotations:
+          description: This server's Elasticsearch instance status has a value of {{ $value
+            }}.
+          summary: 'Instance {{ $labels.instance }}: Elasticsearch instance status is
+        not 1'
+      - alert: Elastic_Cluster_Health_RED
+        expr: elasticsearch_cluster_health_status{color="red"} == 1
+        for: 5m
+        labels:
+          severity: alert
+          value: '{{$value}}'
+        annotations:
+          description: 'Instance {{ $labels.instance }}: not all primary and replica shards
+        are allocated in elasticsearch cluster {{ $labels.cluster }}.'
+          summary: 'Instance {{ $labels.instance }}: not all primary and replica shards
+        are allocated in elasticsearch cluster {{ $labels.cluster }}'
+      - alert: Elastic_Cluster_Health_Yellow
+        expr: elasticsearch_cluster_health_status{color="yellow"} == 1
+        for: 5m
+        labels:
+          severity: alert
+          value: '{{$value}}'
+        annotations:
+          description: 'Instance {{ $labels.instance }}: not all primary and replica shards
+        are allocated in elasticsearch cluster {{ $labels.cluster }}.'
+          summary: 'Instance {{ $labels.instance }}: not all primary and replica shards
+        are allocated in elasticsearch cluster {{ $labels.cluster }}'
+      - alert: Elasticsearch_JVM_Heap_Too_High
+        expr: elasticsearch_jvm_memory_used_bytes{area="heap"} / elasticsearch_jvm_memory_max_bytes{area="heap"}
+          > 0.8
+        for: 15m
+        labels:
+          severity: alert
+          value: '{{$value}}'
+        annotations:
+          description: The heap in {{ $labels.instance }} is over 80% for 15m.
+          summary: ElasticSearch node {{ $labels.instance }} heap usage is high
+      - alert: Elasticsearch_health_up
+        expr: elasticsearch_cluster_health_up != 1
+        for: 1m
+        labels:
+          severity: alert
+          value: '{{$value}}'
+        annotations:
+          description: 'ElasticSearch node: {{ $labels.instance }} last scrape of the
+        ElasticSearch cluster health failed'
+          summary: 'ElasticSearch node: {{ $labels.instance }} last scrape of the ElasticSearch
+        cluster health failed'
+      - alert: Elasticsearch_Too_Few_Nodes_Running
+        expr: elasticsearch_cluster_health_number_of_nodes < 3
+        for: 5m
+        labels:
+          severity: alert
+          value: '{{$value}}'
+        annotations:
+          description: There are only {{$value}} < 3 ElasticSearch nodes running
+          summary: ElasticSearch running on less than 3 nodes
+      - alert: Elasticsearch_Count_of_JVM_GC_Runs
+        expr: rate(elasticsearch_jvm_gc_collection_seconds_count[5m]) > 5
+        for: 1m
+        labels:
+          severity: warning
+          value: '{{$value}}'
+        annotations:
+          description: 'ElasticSearch node {{ $labels.instance }}: Count of JVM GC runs
+        > 5 per sec and has a value of {{ $value }}'
+          summary: 'ElasticSearch node {{ $labels.instance }}: Count of JVM GC runs >
+        5 per sec and has a value of {{ $value }}'
+      - alert: Elasticsearch_GC_Run_Time
+        expr: rate(elasticsearch_jvm_gc_collection_seconds_sum[5m]) > 0.3
+        for: 1m
+        labels:
+          severity: warning
+          value: '{{$value}}'
+        annotations:
+          description: 'ElasticSearch node {{ $labels.instance }}: GC run time in seconds
+        > 0.3 sec and has a value of {{ $value }}'
+          summary: 'ElasticSearch node {{ $labels.instance }}: GC run time in seconds
+        > 0.3 sec and has a value of {{ $value }}'
+      - alert: Elasticsearch_json_parse_failures
+        expr: elasticsearch_cluster_health_json_parse_failures > 0
+        for: 1m
+        labels:
+          severity: warning
+          value: '{{$value}}'
+        annotations:
+          description: 'ElasticSearch node {{ $labels.instance }}: json parse failures
+        > 0 and has a value of {{ $value }}'
+          summary: 'ElasticSearch node {{ $labels.instance }}: json parse failures > 0
+        and has a value of {{ $value }}'
+      - alert: Elasticsearch_breakers_tripped
+        expr: rate(elasticsearch_breakers_tripped[5m]) > 0
+        for: 1m
+        labels:
+          severity: warning
+          value: '{{$value}}'
+        annotations:
+          description: 'ElasticSearch node {{ $labels.instance }}: breakers tripped >
+        0 and has a value of {{ $value }}'
+          summary: 'ElasticSearch node {{ $labels.instance }}: breakers tripped > 0 and
+        has a value of {{ $value }}'
+      - alert: Elasticsearch_health_timed_out
+        expr: elasticsearch_cluster_health_timed_out > 0
+        for: 1m
+        labels:
+          severity: warning
+          value: '{{$value}}'
+        annotations:
+          description: 'ElasticSearch node {{ $labels.instance }}: Number of cluster health
+        checks timed out > 0 and has a value of {{ $value }}'
+          summary: 'ElasticSearch node {{ $labels.instance }}: Number of cluster health
+        checks timed out > 0 and has a value of {{ $value }}'
